@@ -1,0 +1,10 @@
+import { Menu, X, MessageCircle } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import { site } from '../config/site'
+import { CallButton, WhatsAppButton } from './Actions'
+import { puneWestLocations } from '../lib/properties'
+const links = [['/', 'Home'], ['/buy', 'Buy'], ['/rent', 'Rent'], ['/projects', 'Projects'], ['/sell', 'Sell Property'], ['/about', 'About'], ['/contact', 'Contact']]
+export function Header() { const [open, setOpen] = useState(false); return <header><div className="nav shell"><Link className="brand" to="/"><img src="/right-key-properties-logo.png" alt="Right Key Properties" /></Link><nav className={open ? 'open' : ''}>{links.map(([to, label]) => <NavLink key={to} to={to} onClick={() => setOpen(false)}>{label}</NavLink>)}<WhatsAppButton className="nav-cta" /></nav><button className="menu" onClick={() => setOpen(!open)} aria-label="Toggle navigation">{open ? <X /> : <Menu />}</button></div></header> }
+export function Footer() { return <footer><div className="shell footer-grid"><div><img className="footer-logo" src="/right-key-properties-logo.png" alt="Right Key Properties" /><p>Thoughtful property assistance for Pune West.</p><p className="small">Contact details will be added soon.</p></div><div><h3>Explore</h3>{links.slice(1).map(([to, label]) => <Link key={to} to={to}>{label}</Link>)}</div><div><h3>Pune West</h3>{puneWestLocations.map((location) => <Link key={location} to={`/buy?location=${encodeURIComponent(location)}`}>{location}</Link>)}</div><div><h3>Property types</h3><Link to="/buy?type=Apartment">Apartments</Link><Link to="/buy?type=Villa">Villas</Link><Link to="/rent?type=Commercial">Commercial</Link></div></div><div className="shell footer-bottom">© {new Date().getFullYear()} {site.name}. <span>Demo listings are for illustration only.</span></div></footer> }
+export function MobileActions() { return <div className="mobile-actions"><CallButton /><a className="btn btn-gold" href="#contact"><MessageCircle size={17} /> WhatsApp</a></div> }

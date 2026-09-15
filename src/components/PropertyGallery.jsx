@@ -1,0 +1,1 @@
+export default function PropertyGallery({ property }) { return <div className="gallery">{property.gallery.map((image, index) => <img key={image} src={image} alt={`${property.name} demo property view ${index + 1}`} />)}</div> }
